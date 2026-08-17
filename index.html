@@ -1,368 +1,361 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Echo Mix Videoke</title>
+<title>EchoMix</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body{
-background:#202124;
-color:white;
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080808;
+    color:#fff;
 }
+
+/* =========================
+   MAIN
+========================= */
+
+.home{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:
+        radial-gradient(circle at 50% 35%, #222 0%, #0b0b0b 45%, #050505 100%);
+}
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-max-width:900px;
-margin:auto;
-padding:20px;
+    width:100%;
+    max-width:1100px;
+    text-align:center;
 }
 
-.app-header{
-display:flex;
-gap:20px;
-align-items:center;
-flex-wrap:wrap;
+/* =========================
+   LOGO / TITLE
+========================= */
+
+.logo{
+    font-size:clamp(42px,7vw,90px);
+    font-weight:900;
+    letter-spacing:4px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+
+    background:linear-gradient(
+        90deg,
+        #00ff88,
+        #00d9ff,
+        #8b5cff,
+        #ff00cc
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+    filter:drop-shadow(0 0 15px rgba(0,255,150,.25));
 }
 
-.app-icon{
-width:120px;
-height:120px;
-border-radius:25px;
-object-fit:cover;
-background:#333;
+.subtitle{
+    font-size:clamp(15px,2vw,22px);
+    color:#aaa;
+    margin-bottom:50px;
 }
 
-.app-info{
-flex:1;
+/* =========================
+   BUTTON AREA
+========================= */
+
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+    width:100%;
+    max-width:850px;
+    margin:auto;
 }
 
-.app-info h1{
-font-size:34px;
+/* =========================
+   BUTTON
+========================= */
+
+.menu-button{
+    position:relative;
+    min-height:230px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+    color:white;
+
+    border:2px solid #333;
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
+        );
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+
+    overflow:hidden;
 }
 
-.app-info h3{
-color:#8ab4f8;
-margin-top:5px;
-font-weight:normal;
+.menu-button::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:25px;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,255,150,.35),
+        transparent
+    );
+
+    opacity:0;
+    transition:.3s;
 }
 
-.stats{
-display:flex;
-gap:35px;
-margin-top:20px;
-flex-wrap:wrap;
+.menu-button:hover{
+    transform:translateY(-8px) scale(1.02);
+    border-color:#00ff88;
+
+    box-shadow:
+        0 20px 60px rgba(0,255,136,.18),
+        0 0 25px rgba(0,255,136,.12),
+        inset 0 1px 0 rgba(255,255,255,.1);
 }
 
-.stat{
-text-align:center;
+.menu-button:hover::before{
+    opacity:1;
 }
 
-.stat b{
-display:block;
-font-size:18px;
+.icon{
+    font-size:70px;
+    margin-bottom:20px;
+    position:relative;
+    z-index:1;
 }
 
-.download-btn{
-
-display:inline-block;
-margin-top:25px;
-padding:15px 45px;
-background:#00c853;
-color:white;
-font-size:20px;
-text-decoration:none;
-border-radius:50px;
-transition:.3s;
-font-weight:bold;
-
+.button-title{
+    font-size:30px;
+    font-weight:800;
+    position:relative;
+    z-index:1;
 }
 
-.download-btn:hover{
-
-background:#00e676;
-
+.button-description{
+    margin-top:8px;
+    font-size:15px;
+    color:#999;
+    position:relative;
+    z-index:1;
 }
 
-.section{
+/* Controller */
 
-margin-top:40px;
+.controller:hover{
+    border-color:#00d9ff;
 
+    box-shadow:
+        0 20px 60px rgba(0,217,255,.18),
+        0 0 25px rgba(0,217,255,.12);
 }
 
-.section h2{
+/* Videoke */
 
-margin-bottom:15px;
+.videoke:hover{
+    border-color:#ff00cc;
 
+    box-shadow:
+        0 20px 60px rgba(255,0,204,.18),
+        0 0 25px rgba(255,0,204,.12);
 }
 
-.screenshots{
-
-display:flex;
-overflow-x:auto;
-gap:15px;
-
-}
-
-.screenshots img{
-
-height:380px;
-border-radius:20px;
-
-}
-
-.card{
-
-background:#2d2d2d;
-padding:20px;
-border-radius:15px;
-
-}
-
-.features{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-
-}
-
-.feature{
-
-background:#303134;
-padding:15px;
-border-radius:15px;
-
-}
-
-.version{
-
-display:flex;
-justify-content:space-between;
-padding:15px 0;
-border-bottom:1px solid #444;
-
-}
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
-
-text-align:center;
-padding:40px;
-color:#888;
-
+    margin-top:50px;
+    color:#666;
+    font-size:13px;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
-.app-header{
+    .home{
+        padding:20px 15px;
+        min-height:100vh;
+    }
 
-flex-direction:column;
-text-align:center;
+    .logo{
+        font-size:42px;
+        letter-spacing:2px;
+        margin-bottom:8px;
+    }
 
+    .subtitle{
+        font-size:14px;
+        margin-bottom:30px;
+    }
+
+    .buttons{
+        grid-template-columns:1fr;
+        gap:18px;
+        max-width:420px;
+    }
+
+    .menu-button{
+        min-height:175px;
+        border-radius:20px;
+    }
+
+    .menu-button::before{
+        border-radius:20px;
+    }
+
+    .icon{
+        font-size:52px;
+        margin-bottom:12px;
+    }
+
+    .button-title{
+        font-size:24px;
+    }
+
+    .button-description{
+        font-size:13px;
+        margin-top:6px;
+    }
+
+    .footer{
+        margin-top:30px;
+        font-size:11px;
+    }
 }
 
-.app-icon{
+/* =========================
+   SMALL PHONES
+========================= */
 
-width:100px;
-height:100px;
+@media(max-width:380px){
 
+    .logo{
+        font-size:35px;
+    }
+
+    .subtitle{
+        margin-bottom:22px;
+    }
+
+    .menu-button{
+        min-height:150px;
+    }
+
+    .icon{
+        font-size:45px;
+        margin-bottom:8px;
+    }
+
+    .button-title{
+        font-size:21px;
+    }
 }
-
-.app-info h1{
-
-font-size:26px;
-
-}
-
-.download-btn{
-
-width:100%;
-font-size:18px;
-
-}
-
-.stats{
-
-justify-content:center;
-
-}
-
-.screenshots img{
-
-height:250px;
-
-}
-
-}
-
 </style>
-
 </head>
+
 <body>
 
-<div class="container">
+<div class="home">
 
-<div class="app-header">
+    <div class="container">
 
-<img src="icon.png" class="app-icon">
+        <div class="logo">
+            ECHOMIX
+        </div>
 
-<div class="app-info">
+        <div class="subtitle">
+            Choose an application
+        </div>
 
-<h1>Echo Mix Videoke</h1>
+        <div class="buttons">
 
-<h3>Echo Mix Developer</h3>
+            <!-- CONTROLLER -->
+            <a
+                href="https://echomixjstv-hash.github.io/controller/"
+                class="menu-button controller"
+            >
+                <div class="icon">🎮</div>
 
-<div class="stats">
+                <div class="button-title">
+                    CONTROLLER
+                </div>
 
-<div class="stat">
-<b>4.9 ★</b>
-Rating
-</div>
+                <div class="button-description">
+                    Open Quiz Controller
+                </div>
+            </a>
 
-<div class="stat">
-<b>5K+</b>
-Downloads
-</div>
 
-<div class="stat">
-<b>5.7 GB</b>
-Size
-</div>
+            <!-- ECHOMIX VIDEOKE -->
+            <a
+                href="echomix videoke.html"
+                class="menu-button videoke"
+            >
+                <div class="icon">🎤</div>
 
-<div class="stat">
-<b>Everyone</b>
-Age
-</div>
+                <div class="button-title">
+                    ECHOMIX VIDEOKE
+                </div>
 
-</div>
+                <div class="button-description">
+                    Open EchoMix Videoke
+                </div>
+            </a>
 
-<a href="https://drive.google.com/file/d/1VFJ_t13uKnmZu8eb73a3KFZDeHWACGUA/view?usp=sharing" download class="download-btn">
-⬇ Download
-</a>
+        </div>
 
-</div>
+        <div class="footer">
+            © 2026 EchoMix
+        </div>
 
-</div>
-
-<div class="section">
-
-<h2>About this App</h2>
-
-<div class="card">
-
-Offline PC Videoke application.
-
-✔ Classic Mode
-
-✔ Battle Mode
-
-✔ HD Videos
-
-✔ Easy Search
-
-✔ Queue System
-
-✔ Offline Use
-
-✔ SongGab -- Coming soon
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Screenshots</h2>
-
-<div class="screenshots">
-
-<img src="screen1.png">
-<img src="screen2.png">
-<img src="screen3.png">
-<img src="screen4.png">
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>Features</h2>
-
-<div class="features">
-
-<div class="feature">
-🎤 Offline Videoke
-</div>
-
-<div class="feature">
-📺 HD Video Playback
-</div>
-
-<div class="feature">
-🎵 Thousands of Songs
-</div>
-
-<div class="feature">
-🔍 Fast Search
-</div>
-
-<div class="feature">
-📥 Easy Updates
-</div>
-
-<div class="feature">
-💻 Windows PC Support
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>App Information</h2>
-
-<div class="card">
-
-<div class="version">
-<span>Version</span>
-<span>1.0.0</span>
-</div>
-
-<div class="version">
-<span>Updated</span>
-<span>July 2026</span>
-</div>
-
-<div class="version">
-<span>Developer</span>
-<span>Echo Mix</span>
-</div>
-
-<div class="version">
-<span>Category</span>
-<span>Music</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="footer">
-
-© 2026 Echo Mix Videoke
-
-</div>
+    </div>
 
 </div>
 
